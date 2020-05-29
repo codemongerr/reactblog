@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "./Button";
 import View from "./View";
+import { CURRENT_PAGE_KEY } from '../utils/constants';
 import { scrollToTop, setLocalStorageItem } from '../utils/helper';
 
 function Pagination({ page, hidePrevBtn, hideNextBtn, onClick }) {
@@ -9,14 +10,14 @@ function Pagination({ page, hidePrevBtn, hideNextBtn, onClick }) {
   const handlePrevPage = () => {
     const prevPage = page + 1;
     onClick(prevPage);
-    setLocalStorageItem('currentPage', prevPage);
+    setLocalStorageItem(CURRENT_PAGE_KEY, prevPage);
     scrollToTop();
   }
 
   const handleNextPage = () => {
     const nextPage = page - 1;
     onClick(nextPage);
-    setLocalStorageItem('currentPage', nextPage);
+    setLocalStorageItem(CURRENT_PAGE_KEY, nextPage);
     scrollToTop();
   }
 
@@ -28,7 +29,7 @@ function Pagination({ page, hidePrevBtn, hideNextBtn, onClick }) {
             className="btn btn-outline-primary rounded-pill mr-3"
             onClick={handlePrevPage}
           >
-            &#8592; Older
+            &#8592; previous posts
           </Button>
         )}
         {!hideNextBtn && (
@@ -36,7 +37,7 @@ function Pagination({ page, hidePrevBtn, hideNextBtn, onClick }) {
             className="btn btn-outline-primary rounded-pill"
             onClick={handleNextPage}
           >
-            Newest &#8594;
+            next posts &#8594;
           </Button>
         )}
       </View>
