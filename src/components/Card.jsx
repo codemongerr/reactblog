@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import Heading from "./Heading";
 import Text from "./Text";
 
-function Post(props) {
-  const { id, title, body, showComments } = props;
+const CardFooter = ({ children }) => {
+  return (<div>{children}</div>);
+};
+
+function Card(props) {
+  const { id, title, body, children } = props;
   return (
     <article className="card bg-transparent my-5">
       <div className="card-body">
@@ -17,23 +20,19 @@ function Post(props) {
             <Text as="strong">#{id}</Text> {body}
           </Text>
         </div>
-        <div>
-          <Link to={`/post/${id}`}>view comments</Link>
-        </div>
+        {children}
       </div>
     </article>
   );
 }
 
-Post.propTypes = {
+Card.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  showComments: PropTypes.bool,
+  children: PropTypes.node,
 };
 
-Post.defaultProps = {
-  showComments: false,
-};
+Card.Footer = CardFooter;
 
-export default Post;
+export default Card;

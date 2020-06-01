@@ -1,17 +1,24 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 import Heading from '../components/Heading';
-import Post from '../components/Post';
+import Card from '../components/Card';
 
 function Posts({ data }) {
   return (
     <Fragment>
       {(data && data.length) > 0 ? (
         data.map((post) => {
-          return <Post {...post} key={post.id} />;
+          return (
+            <Card {...post} key={post.id}>
+              <Card.Footer>
+                <Link to={`/post/${post.id}`}>view comments</Link>
+              </Card.Footer>
+            </Card>
+          );
         })
       ) : (
-        <Heading as="h3" className="my-5 text-center">No posts found</Heading>
+        <Heading as="h3" className="my-5 text-center">Loading...</Heading>
       )}
     </Fragment>
   );
